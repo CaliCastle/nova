@@ -1,6 +1,6 @@
 using Nova;
-using System;
 using System.Linq;
+using Random = System.Random;
 
 namespace Example
 {

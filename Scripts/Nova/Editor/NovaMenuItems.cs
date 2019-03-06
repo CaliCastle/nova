@@ -28,7 +28,7 @@ namespace Nova.Editor
         private static GameObject MakeUIView( MenuCommand menuCommand, string name = "UIView" )
         {
             GameObject gameObject = CreateGameObject( menuCommand, name, typeof( Canvas ), typeof( CanvasScaler ),
-                typeof( CanvasGroup ), typeof( UIView ) );
+                typeof(GraphicRaycaster), typeof( CanvasGroup ), typeof( UIView ) );
 
             Canvas canvas = gameObject.GetComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
@@ -50,14 +50,6 @@ namespace Nova.Editor
             Selection.activeObject = gameObject;
 
             return gameObject;
-        }
-
-        private static void CreateScriptAsset( string templatePath, string destName )
-        {
-            typeof( ProjectWindowUtil )
-                .GetMethod( "CreateScriptAsset",
-                    System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic )
-                ?.Invoke( null, new object[] {templatePath, destName} );
         }
     }
 }

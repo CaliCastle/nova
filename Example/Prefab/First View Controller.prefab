@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1024311710531099816}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 4754255375464067090}
   - component: {fileID: 8104906922898381563}
   - component: {fileID: 651255497131970111}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,7 +245,7 @@ GameObject:
   - component: {fileID: 6705161753449777982}
   - component: {fileID: 5565029362972526352}
   - component: {fileID: 4110808034633059076}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,7 +322,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 254856144126224709}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3762182533634149881}
   - component: {fileID: 7607295268881128213}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Views
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -486,7 +486,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6202883908271557562}
   - component: {fileID: 7876528054457579202}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Safe Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
