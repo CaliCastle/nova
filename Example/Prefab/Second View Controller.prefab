@@ -116,11 +116,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Configuration:
     Identifier: second
-    Title: 
+    Title: Second View Controller
     TransitionType: 0
     HideNavigationOverlays: 0
-    HideNavigationCloseButton: 0
-    HideNavigationTitle: 0
+    HideNavigationOnPush: 0
   m_presentationDuration: 0.2
   StuffToDisplay: 
   m_text: {fileID: 5506982564071991027}

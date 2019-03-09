@@ -18,10 +18,10 @@ namespace Nova
     {
         #region Properties
 
-        public UIView View => m_view;
+        public UIRootView RootView => m_rootView;
 
         [SerializeField]
-        private UIView m_view;
+        private UIRootView m_rootView;
 
         [SerializeField]
         private bool m_shouldResetView = true;
@@ -56,7 +56,7 @@ namespace Nova
                 return null;
             }
 
-            T controller = Instantiate( prefab, m_view.transform );
+            T controller = Instantiate( prefab, m_rootView.transform );
             controller.gameObject.name = typeof( T ).Name;
             controller.ResetBounds();
             controller.transform.SetAsLastSibling();
@@ -81,9 +81,9 @@ namespace Nova
             return prefab;
         }
 
-        public void Inject( [NotNull] UIView view )
+        public void Inject( [NotNull] UIRootView view )
         {
-            m_view = view;
+            m_rootView = view;
         }
 
         #endregion Public
@@ -92,13 +92,17 @@ namespace Nova
 
         private void Awake()
         {
-            if ( m_view == null )
+            if ( m_rootView == null )
             {
                 Debug.LogError( $"<b>{gameObject.name}</b> doesn't have <i>`m_view`</i> field assigned." );
                 return;
             }
 
             ResetView();
+        }
+
+        private void Start()
+        {
             Launch();
         }
 
@@ -116,7 +120,7 @@ namespace Nova
                 return;
             }
 
-            m_view.GetComponentsInChildren( true, m_viewControllers );
+            m_rootView.GetComponentsInChildren( true, m_viewControllers );
             foreach ( UIViewController controller in m_viewControllers )
             {
                 if ( controller )

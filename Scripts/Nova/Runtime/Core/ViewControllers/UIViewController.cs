@@ -28,12 +28,7 @@ namespace Nova
         /// </summary>
         public bool HideNavigationOverlays;
 
-        /// <summary>
-        /// Whether or not to hide the bottom close button when presenting
-        /// </summary>
-        public bool HideNavigationCloseButton;
-
-        public bool HideNavigationTitle;
+        public bool HideNavigationOnPush;
     }
 
     [RequireComponent( typeof( CanvasGroup ) )]

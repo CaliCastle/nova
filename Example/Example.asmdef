@@ -1,7 +1,8 @@
 {
     "name": "Example",
     "references": [
-        "Nova"
+        "Nova",
+        "Unity.TextMeshPro"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

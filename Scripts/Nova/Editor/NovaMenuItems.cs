@@ -16,7 +16,7 @@ namespace Nova.Editor
             GameObject window = CreateGameObject( menuCommand, "UIWindow", typeof( UIWindow ) );
             GameObject view = MakeUIView( menuCommand, "Main View" );
             view.transform.SetParent( window.transform );
-            window.GetComponent<UIWindow>().Inject( view.GetComponent<UIView>() );
+            window.GetComponent<UIWindow>().Inject( view.GetComponent<UIRootView>() );
         }
 
         [MenuItem( "GameObject/Nova/UIView", false, 10 )]
@@ -28,7 +28,7 @@ namespace Nova.Editor
         private static GameObject MakeUIView( MenuCommand menuCommand, string name = "UIView" )
         {
             GameObject gameObject = CreateGameObject( menuCommand, name, typeof( Canvas ), typeof( CanvasScaler ),
-                typeof(GraphicRaycaster), typeof( CanvasGroup ), typeof( UIView ) );
+                typeof(GraphicRaycaster), typeof( CanvasGroup ), typeof( UIRootView ) );
 
             Canvas canvas = gameObject.GetComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;

@@ -1,4 +1,3 @@
-using System.Collections;
 using Nova;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,15 +17,6 @@ namespace Example
             base.ViewDidLoad();
 
             m_text.text = StuffToDisplay;
-
-            StartCoroutine( Hide() );
-        }
-
-        private IEnumerator Hide()
-        {
-            yield return new WaitForSeconds( 2f );
-
-            NavigationController?.Pop();
         }
     }
 }

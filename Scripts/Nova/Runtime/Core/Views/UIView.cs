@@ -2,17 +2,36 @@ using UnityEngine;
 
 namespace Nova
 {
-    [RequireComponent( typeof( Canvas ), typeof( CanvasGroup ) )]
+    [RequireComponent( typeof( CanvasGroup ) )]
     public class UIView : MonoBehaviour
     {
-        public Canvas Canvas { get; private set; }
-
         public CanvasGroup CanvasGroup { get; private set; }
 
-        private void Awake()
+        public bool Hidden
         {
-            Canvas = GetComponent<Canvas>();
+            get => CanvasGroup != null && Equals( CanvasGroup.alpha, 0f ) && !CanvasGroup.interactable;
+            set
+            {
+                if ( CanvasGroup != null )
+                {
+                    CanvasGroup.alpha = value ? 0f : 1f;
+                    CanvasGroup.interactable = !value;
+                }
+            }
+        }
+
+        protected virtual void Awake()
+        {
             CanvasGroup = GetComponent<CanvasGroup>();
+
+            if ( CanvasGroup == null )
+            {
+                CanvasGroup = gameObject.AddComponent<CanvasGroup>();
+            }
+        }
+
+        protected virtual void Start()
+        {
         }
     }
 }

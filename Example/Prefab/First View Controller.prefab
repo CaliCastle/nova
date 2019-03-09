@@ -228,11 +228,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Configuration:
     Identifier: first
-    Title: 
+    Title: First View Controller
     TransitionType: 0
     HideNavigationOverlays: 0
-    HideNavigationCloseButton: 0
-    HideNavigationTitle: 0
+    HideNavigationOnPush: 0
   m_presentationDuration: 0.2
 --- !u!1 &3964355261028343170
 GameObject:

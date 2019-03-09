@@ -17,6 +17,9 @@ namespace Nova
         [SerializeField]
         private UIViewController m_initialViewController;
 
+        [SerializeField]
+        private UINavigationBar m_navigationBar;
+
         private bool m_isTransitioning;
 
         #endregion Properties
@@ -57,6 +60,13 @@ namespace Nova
 
             preparation?.Invoke( controller );
 
+            if ( m_navigationBar )
+            {
+                m_navigationBar.SetTitle( controller.Configuration.Title );
+                m_navigationBar.Hidden = controller.Configuration.HideNavigationOnPush;
+                m_navigationBar.BackButton.Hidden = ViewControllers.Count == 0;
+            }
+
             ViewControllers.Push( controller );
 
             controller.Show( animates, onComplete );
@@ -66,15 +76,29 @@ namespace Nova
 
         public UIViewController Pop( bool animates = true, Action onComplete = null )
         {
-            UIViewController controller = ViewControllers.Pop();
-            controller.ViewWillDisappear();
-            controller.Hide( animates, () =>
+            if ( ViewControllers.Count <= 1 )
+            {
+                return null;
+            }
+
+            UIViewController poppedViewController = ViewControllers.Pop();
+            UIViewController prevViewController = ViewControllers.Peek();
+
+            if ( m_navigationBar )
+            {
+                m_navigationBar.SetTitle( prevViewController.Configuration.Title );
+                m_navigationBar.Hidden = prevViewController.Configuration.HideNavigationOnPush;
+                m_navigationBar.BackButton.Hidden = ViewControllers.Count <= 1;
+            }
+
+            poppedViewController.ViewWillDisappear();
+            poppedViewController.Hide( animates, () =>
             {
                 onComplete?.Invoke();
-                Destroy( controller.gameObject );
+                Destroy( poppedViewController.gameObject );
             } );
 
-            return controller;
+            return poppedViewController;
         }
 
         #endregion Public
@@ -89,6 +113,18 @@ namespace Nova
             {
                 Debug.LogError( $"<b>{GetType()}</b> doesn't have <i>`m_initialViewController`</i> field assigned." );
             }
+
+            if ( m_navigationBar == null )
+            {
+                Debug.LogError( $"<b>{GetType()}</b> doesn't have <i>`m_navigationBar`</i> field assigned." );
+            }
+
+            SetupNavigationBar();
+        }
+
+        protected override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
 
             PresentInitialViewController();
         }
@@ -105,6 +141,14 @@ namespace Nova
             }
 
             Push( m_initialViewController, false );
+        }
+
+        private void SetupNavigationBar()
+        {
+            if ( m_navigationBar != null )
+            {
+                m_navigationBar.BackDidTap = delegate { Pop(); };
+            }
         }
 
         #endregion Private

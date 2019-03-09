@@ -224,7 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5372cacf09f4f71bc24a9e3f7e6d36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_view: {fileID: 2044275107}
+  m_rootView: {fileID: 2044275107}
   m_shouldResetView: 1
   m_viewControllerPrefabPool:
   - {fileID: 430321054445958532, guid: 28fa7b6afec4f481f9597932d2ab3ace, type: 3}
@@ -287,7 +287,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2044275106}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83620feae9674bae8720df5b3866b49f, type: 3}
+  m_Script: {fileID: 11500000, guid: fd8e9b9f12394402a86ce0d4e05a586b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!225 &2044275108
