@@ -15,12 +15,12 @@ namespace Nova
         /// The initial view controller to be present on
         /// </summary>
         [SerializeField]
-        private UIViewController m_initialViewController;
+        protected UIViewController m_initialViewController;
 
         [SerializeField]
-        private UINavigationBar m_navigationBar;
+        protected UINavigationBar m_navigationBar;
 
-        private bool m_isTransitioning;
+        protected bool m_isTransitioning;
 
         #endregion Properties
 
@@ -131,9 +131,7 @@ namespace Nova
 
         #endregion UIViewController
 
-        #region Private
-
-        private void PresentInitialViewController()
+        protected virtual void PresentInitialViewController()
         {
             if ( m_initialViewController == null )
             {
@@ -142,6 +140,8 @@ namespace Nova
 
             Push( m_initialViewController, false );
         }
+
+        #region Private
 
         private void SetupNavigationBar()
         {
