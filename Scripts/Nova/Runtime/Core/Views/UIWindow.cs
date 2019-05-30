@@ -47,7 +47,7 @@ namespace Nova
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         [CanBeNull]
-        public T Present<T>( bool animates = true, Action<T> preparation = null, Action onComplete = null ) where T : UIViewController
+        public virtual T Present<T>( bool animates = true, Action<T> preparation = null, Action onComplete = null ) where T : UIViewController
         {
             T prefab = GetControllerPrefab<T>();
 
@@ -70,7 +70,7 @@ namespace Nova
         }
 
         [CanBeNull]
-        public T GetControllerPrefab<T>() where T : UIViewController
+        public virtual T GetControllerPrefab<T>() where T : UIViewController
         {
             T prefab = m_viewControllerPrefabPool.Find( vc => vc is T ) as T;
             if ( prefab == null )
@@ -90,7 +90,7 @@ namespace Nova
 
         #region MonoBehaviour
 
-        private void Awake()
+        protected virtual void Awake()
         {
             if ( m_rootView == null )
             {
@@ -101,7 +101,7 @@ namespace Nova
             ResetView();
         }
 
-        private void Start()
+        protected virtual void Start()
         {
             Launch();
         }

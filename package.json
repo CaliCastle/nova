@@ -1,7 +1,7 @@
 {
   "name": "com.calicastle.nova",
   "displayName": "Nova",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "unity": "2018.1",
   "description": "A Unity UI framework for creating and managing UIs in an elegant way ✨",
   "keywords": [
