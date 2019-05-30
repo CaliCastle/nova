@@ -41,6 +41,8 @@ namespace Nova
 
         public View View => m_view;
 
+        public UIWindow Window => m_window;
+
         [CanBeNull]
         public UINavigationController NavigationController => m_navigationController;
 
