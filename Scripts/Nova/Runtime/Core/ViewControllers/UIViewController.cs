@@ -75,29 +75,55 @@ namespace Nova
         /// <summary>
         /// Present another view controller
         /// </summary>
-        /// <param name="viewController"></param>
-        /// <param name="duration"></param>
+        /// <param name="animates"></param>
+        /// <param name="preparation"></param>
         /// <param name="onComplete"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public virtual void Present( float? duration = null, Action onComplete = null )
+        public virtual T Present<T>( bool animates = true, Action<T> preparation = null,
+            Action onComplete = null ) where T : UIViewController
         {
+            if ( m_isFading )
+            {
+                Debug.LogWarning(
+                    $"Can't present another ViewController when the current ViewController [{gameObject.name}] is animating!"
+                );
+                return null;
+            }
+
+            T prefab = m_window.GetControllerPrefab<T>();
+
+            if ( prefab == null )
+            {
+                Debug.LogError( $"Unable to get prefab for <b>{typeof( T )}</b>." );
+                return null;
+            }
+
+            T controller = Instantiate( prefab,
+                NavigationController != null ? NavigationController.View.Foreground : m_view.Foreground );
+            controller.Inject( m_window );
+            controller.name = prefab.name;
+            controller.transform.localScale = Vector3.one;
+
+            preparation?.Invoke( controller );
+
+            controller.Show( animates, onComplete );
+
+            return controller;
         }
 
         /// <summary>
         /// Dismiss self
         /// </summary>
-        /// <param name="duration"></param>
+        /// <param name="animates"></param>
         /// <param name="onComplete"></param>
-        public virtual void Dismiss( float? duration = null, Action onComplete = null )
+        public virtual void Dismiss( bool animates = true, Action onComplete = null )
         {
-            switch ( Configuration.TransitionType )
+            ViewWillDisappear();
+            Hide( animates, () =>
             {
-                case UIViewControllerTransitionType.Fade:
-                    FadeOut( duration, onComplete );
-                    break;
-                default:
-                    return;
-            }
+                onComplete?.Invoke();
+                Destroy( gameObject );
+            } );
         }
 
         public virtual void Show( bool animates = true, Action onComplete = null )
@@ -220,7 +246,6 @@ namespace Nova
 
         protected void Awake()
         {
-            GetRootWindow();
             GetView();
             GetCanvasGroup();
 
@@ -229,6 +254,7 @@ namespace Nova
 
         protected void Start()
         {
+            GetRootWindow();
             ViewDidLoad();
         }
 
@@ -289,7 +315,10 @@ namespace Nova
 
         private void GetRootWindow()
         {
-            m_window = GetComponentInParent<UIWindow>();
+            if ( m_window == null )
+            {
+                m_window = GetComponentInParent<UIWindow>();
+            }
         }
 
         private void GetView()

@@ -12,6 +12,11 @@ namespace Example
         [SerializeField]
         private Text m_text;
 
+        public void PresentAnother()
+        {
+            Present<ExampleNavigationController>();
+        }
+
         protected override void ViewDidLoad()
         {
             base.ViewDidLoad();
